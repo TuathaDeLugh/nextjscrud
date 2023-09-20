@@ -1,6 +1,6 @@
 "use client"
 import { useRouter } from "next/navigation";
-
+import { toast } from 'react-toastify';
 import React from 'react'
 import {AiOutlineDelete} from 'react-icons/ai'
 function RemoveBtn({ id }) {
@@ -10,7 +10,18 @@ function RemoveBtn({ id }) {
     if (confirmed){
       const res = await fetch(`http://localhost:3000/api/projects?id=${id}`,{method:"DELETE"})
       if (res.ok) {
-        router.refresh();
+        toast.success('Project Deleted', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+          router.refresh();
+        return;
       } else {
         throw new Error("Failed to create a Project");
       }

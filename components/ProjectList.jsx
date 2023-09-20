@@ -4,14 +4,16 @@ import Link from 'next/link'
 import {AiFillEdit} from 'react-icons/ai'
  
 const getProjects = async () => {
+  
   try {
     const res = await fetch ('http://localhost:3000/api/projects',{
       cache:'no-cache',
      });
-
+     
     if (!res.ok){
       throw new Error ('Failed to fatch');
     }
+  
     return res.json();
 
   } catch (error) {

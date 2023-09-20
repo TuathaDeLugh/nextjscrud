@@ -1,15 +1,29 @@
-import React from 'react'
+import EditProjectForm from "@/components/EditProjectForm";
 
-function Edit() {
-  return (
-    <form className="flex flex-col gap-2">
-        <input className=" border border-slate-500 px-8 py-2 rounded"
-        placeholder="Enter Title" type="text" name="title" id="title" />
-        <textarea className=" border border-slate-500 px-8 py-2 h-52 rounded"
-        placeholder="Enter Details" name="details" id="details" />
-        <button className=" bg-green-600 font-bold text-white py-3 px-6 rounded">Update Project</button>
-    </form>
-  )
+const getProjectById = async (id) => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/projects/${id}`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch project");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default async function Edit({ params }) {
+  const { id } = params;
+  const { project } = await getProjectById(id);
+  const { title, discription } = project;
+
+  return <EditProjectForm id={id} title={title} discription={discription} />;
 }
 
-export default Edit
+
+
+

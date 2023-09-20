@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from "next/navigation";
+import { toast } from 'react-toastify';
+
 
 
 function Projects() {
@@ -13,7 +15,16 @@ function Projects() {
     e.preventDefault();
 
     if (!title || !discription) {
-      alert("Title and description are required.");
+      toast.error('Title and description are required.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
       return;
     }
     try {
@@ -26,7 +37,19 @@ function Projects() {
       });
 
       if (res.ok) {
-        router.push("/");
+        toast.success('Project added', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+          router.refresh();
+          router.push("/");
+        return;
       } else {
         throw new Error("Failed to create a Project");
       }
@@ -36,6 +59,7 @@ function Projects() {
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      
         <input 
         onChange={(e)=> setTitle(e.target.value) }value={title} 
         className=" border border-slate-500 px-8 py-2 rounded"
