@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 
 export async function PUT(request,{params}){
     const { id } = params;
-    const { newt: title, newd : discription,} = await request.json();
+    const { newTitle: title, newdiscription : discription,} = await request.json();
     await connection();
     await Project.findByIdAndUpdate(id, { title,discription });
     return NextResponse.json({message:"Project updated"},{status:200});
