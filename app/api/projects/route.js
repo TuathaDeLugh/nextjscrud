@@ -8,3 +8,16 @@ export async function POST (request){
     await Project.create({title,discription});
     return NextResponse.json({message:"Project created"},{status:201});
 }
+
+export async function GET (){
+    await connection();
+    const projects  = await Project.find();
+    return NextResponse.json({projects});
+}
+
+export async function DELETE(request){
+    const id = request.nextUrl.searchParams.get('id');
+    await connection();
+    await Project.findByIdAndDelete(id);
+    return NextResponse.json({message:"Project Deleted"},{status:200});
+}
