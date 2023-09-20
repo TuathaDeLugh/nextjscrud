@@ -26,7 +26,7 @@ async function ProjectList() {
   const  { projects }  = await getProjects();
   return (<>
   {projects.map(t=>(
-    <div className="flex p-4 border border-slate-300 my-3 justify-between gap-5 items-start">
+    <div className="flex p-4 border border-slate-300 my-3 justify-between gap-5 items-start" key={t._id}>
         <div>
             <h2 className="font-bold text-2xl">{t.title}</h2>
             <div>{t.discription}</div>
