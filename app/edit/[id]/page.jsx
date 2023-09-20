@@ -2,7 +2,8 @@ import EditProjectForm from "@/components/EditProjectForm";
 
 const getProjectById = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/projects/${id}`, {
+    const apiurl = process.env.API_URL;
+      const res = await fetch(`${apiurl}/api/projects/${id}`, {
       cache: "no-store",
     });
 

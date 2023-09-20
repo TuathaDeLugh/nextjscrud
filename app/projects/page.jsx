@@ -28,7 +28,8 @@ function Projects() {
       return;
     }
     try {
-      const res = await fetch("http://localhost:3000/api/projects", {
+      const apiurl = process.env.API_URL;
+      const res = await fetch(`${apiurl}/api/projects`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
