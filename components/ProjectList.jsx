@@ -10,11 +10,7 @@ const getProjects = async () => {
       const res = await fetch(`${apiurl}/api/projects`,{
       cache:'no-cache',
      });
-     
-    if (!res.ok){
-      throw new Error ('Failed to fatch');
-    }
-  
+
     return res.json();
 
   } catch (error) {
@@ -24,9 +20,12 @@ const getProjects = async () => {
 
 
 async function ProjectList() {
-  const  { projects }  = await getProjects();
+  
+  const  { projects }  = await getProjects() | null;
   return (<>
-  {projects.map(t=>(
+
+  { projects && projects.length > 0 ? (
+  projects.map(t=>(
     <div className="flex p-4 border border-slate-300 my-3 justify-between gap-5 items-start" key={t._id}>
         <div>
             <h2 className="font-bold text-2xl">{t.title}</h2>
@@ -36,7 +35,12 @@ async function ProjectList() {
         <RemoveBtn id={t._id}/>
         <Link href={`/edit/${t._id}`} className="text-green-400"><AiFillEdit size={25}/></Link>
     </div>
-    </div>))}
+    </div>))
+    )
+  :<div className="flex p-4 border border-slate-300 my-3 justify-center gap-5 items-">
+    No Projects Found
+  </div>
+  }
   </>
   )
 }

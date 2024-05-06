@@ -13,8 +13,8 @@ export default function EditProjectForm({ id, title, discription }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {const apiurl = process.env.API_URL;
-      const res = await fetch(`${apiurl}/api/projects/${id}`, {
+    try {
+      const res = await fetch(`/api/projects/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

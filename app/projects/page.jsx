@@ -29,7 +29,7 @@ function Projects() {
     }
     try {
       const apiurl = process.env.API_URL;
-      const res = await fetch(`${apiurl}/api/projects`, {
+      const res = await fetch(`/api/projects`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

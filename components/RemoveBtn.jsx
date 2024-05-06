@@ -8,8 +8,7 @@ function RemoveBtn({ id }) {
   const removeProject = async() =>{
     const confirmed = confirm("are you sure??");
     if (confirmed){
-      const apiurl = process.env.API_URL;
-      const res = await fetch(`${apiurl}/api/projects?id=${id}`,{method:"DELETE"})
+      const res = await fetch(`/api/projects?id=${id}`,{method:"DELETE"})
       if (res.ok) {
         toast.success('Project Deleted', {
           position: "top-right",
