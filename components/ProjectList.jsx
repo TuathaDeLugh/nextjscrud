@@ -21,7 +21,7 @@ const getProjects = async () => {
 
 async function ProjectList() {
   
-  const  { projects }  = await getProjects() | null;
+  const  { projects }  = await getProjects();
   return (<>
 
   { projects && projects.length > 0 ? (
